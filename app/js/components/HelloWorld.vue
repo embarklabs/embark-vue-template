@@ -7,6 +7,9 @@
     <h2>Essential Links</h2>
     <ul>
       <li>
+        <a href="http://embark.readthedocs.io/en/latest/index.html" target="_blank">Embark's documentation</a>
+      </li>
+      <li>
         <a
           href="https://vuejs.org"
           target="_blank"
@@ -36,15 +39,6 @@
           target="_blank"
         >
           Twitter
-        </a>
-      </li>
-      <br>
-      <li>
-        <a
-          href="http://vuejs-templates.github.io/webpack/"
-          target="_blank"
-        >
-          Docs for This Template
         </a>
       </li>
     </ul>
