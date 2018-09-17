@@ -13,7 +13,10 @@ const cloneDeep = require('lodash.clonedeep');
 // const CompressionPlugin = require('compression-webpack-plugin');
 const glob = require('glob');
 const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
+const { VueLoaderPlugin } = require('vue-loader');
+
 const path = require('path');
+const fs = require('fs');
 
 const dappPath = process.env.DAPP_PATH;
 const embarkPath = process.env.EMBARK_PATH;
@@ -24,6 +27,17 @@ const embarkNodeModules = path.join(embarkPath, 'node_modules');
 const embarkJson = require(path.join(dappPath, 'embark.json'));
 
 const buildDir = path.join(dappPath, embarkJson.buildDir);
+
+const NODE_ENV = process.env.NODE_ENV;
+const setPath = function(folderName) {
+  return path.join(__dirname, folderName);
+}
+const isProd = function() {
+  return (process.env.NODE_ENV === 'production') ? true : false;
+}
+const buildingForLocal = () => {
+  return (NODE_ENV === 'development');
+};
 
 // it's important to `embark reset` if a pkg version is specified in
 // embark.json and changed/removed later, otherwise pkg resolution may behave
@@ -81,8 +95,7 @@ const base = {
       {
         test: /\.(png|woff|woff2|eot|ttf|svg)$/,
         loader: 'url-loader?limit=100000'
-      },
-      {
+      },{
         test: /\.jsx?$/,
         loader: 'babel-loader',
         exclude: /(node_modules|bower_components|\.embark[\\/]versions)/,
@@ -90,7 +103,7 @@ const base = {
           plugins: [
             [
               'babel-plugin-module-resolver', {
-                'alias': embarkAliases
+                'alias': {embarkAliases}
               }
             ],
             [
@@ -107,12 +120,24 @@ const base = {
                 targets: {
                   browsers: ['last 1 version', 'not dead', '> 0.2%']
                 }
-              }
-            ],
-            '@babel/preset-react'
+              },
+              '@babel/preset-react'
+            ]
           ].map(resolve)
         }
+      },
+      {
+        test: /\.vue?$/,
+        loader: 'vue-loader',
+        exclude: /(node_modules|bower_components|\.embark[\\/]versions)/,
+        options: {
+          plugins:[
+           [ new VueLoaderPlugin(), {
+                'alias': {'vue':'vue/dist/vue.js'}}
+                ]
+           ]
       }
+    }
     ]
   },
   output: {
@@ -123,7 +148,7 @@ const base = {
     libraryTarget: 'umd',
     path: buildDir
   },
-  plugins: [new HardSourceWebpackPlugin()],
+  plugins: [new HardSourceWebpackPlugin(), new VueLoaderPlugin()],
   // profiling and generating verbose stats increases build time; if stats
   // are generated embark will write the output to:
   //   path.join(dappPath, '.embark/stats.[json,report]')
