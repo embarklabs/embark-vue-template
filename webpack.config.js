@@ -16,7 +16,6 @@ const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
 const { VueLoaderPlugin } = require('vue-loader');
 
 const path = require('path');
-const fs = require('fs');
 
 const dappPath = process.env.DAPP_PATH;
 const embarkPath = process.env.EMBARK_PATH;
@@ -27,17 +26,6 @@ const embarkNodeModules = path.join(embarkPath, 'node_modules');
 const embarkJson = require(path.join(dappPath, 'embark.json'));
 
 const buildDir = path.join(dappPath, embarkJson.buildDir);
-
-const NODE_ENV = process.env.NODE_ENV;
-const setPath = function(folderName) {
-  return path.join(__dirname, folderName);
-}
-const isProd = function() {
-  return (process.env.NODE_ENV === 'production') ? true : false;
-}
-const buildingForLocal = () => {
-  return (NODE_ENV === 'development');
-};
 
 // it's important to `embark reset` if a pkg version is specified in
 // embark.json and changed/removed later, otherwise pkg resolution may behave
@@ -103,7 +91,7 @@ const base = {
           plugins: [
             [
               'babel-plugin-module-resolver', {
-                'alias': {embarkAliases}
+                'alias': embarkAliases
               }
             ],
             [
@@ -120,9 +108,9 @@ const base = {
                 targets: {
                   browsers: ['last 1 version', 'not dead', '> 0.2%']
                 }
-              },
-              '@babel/preset-react'
-            ]
+              }
+            ],
+            '@babel/preset-react'
           ].map(resolve)
         }
       },
