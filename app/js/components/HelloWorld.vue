@@ -1,5 +1,8 @@
 <template>
+
   <div class="hello">
+    <h3>Welcome to Embark!</h3>
+    <p>See the <a href="http://embark.readthedocs.io/en/latest/index.html" target="_blank">Embark's documentation</a> to see what you can do with Embark!</p>
     <h1>{{ msg }}</h1>
     <h2>Essential Links</h2>
     <ul>
@@ -88,7 +91,7 @@ export default {
   name: 'HelloWorld',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      msg: 'Welcome to Your Vue.js DApp'
     }
   }
 }
