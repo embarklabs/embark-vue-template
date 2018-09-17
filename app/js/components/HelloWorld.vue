@@ -1,6 +1,7 @@
 <template>
 
   <div class="hello">
+    <input type="text" v-model="msg" />
     <h3>Welcome to Embark!</h3>
     <p>See the <a href="http://embark.readthedocs.io/en/latest/index.html" target="_blank">Embark's documentation</a> to see what you can do with Embark!</p>
     <h1>{{ msg }}</h1>
