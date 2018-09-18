@@ -3,12 +3,12 @@
   <div class="hello">
     <input type="text" v-model="msg" />
     <h3>Welcome to Embark!</h3>
-    <p>See the <a href="http://embark.readthedocs.io/en/latest/index.html" target="_blank">Embark's documentation</a> to see what you can do with Embark!</p>
+    <p>See the <a href="https://embark.status.im/docs/" target="_blank">Embark's documentation</a> to see what you can do with Embark!</p>
     <h1>{{ msg }}</h1>
     <h2>Essential Links</h2>
     <ul>
       <li>
-        <a href="http://embark.readthedocs.io/en/latest/index.html" target="_blank">Embark's documentation</a>
+        <a href="https://embark.status.im/docs/" target="_blank">Embark's documentation</a>
       </li>
       <li>
         <a
