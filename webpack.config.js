@@ -13,6 +13,8 @@ const cloneDeep = require('lodash.clonedeep');
 // const CompressionPlugin = require('compression-webpack-plugin');
 const glob = require('glob');
 const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
+const { VueLoaderPlugin } = require('vue-loader');
+
 const path = require('path');
 
 const dappPath = process.env.DAPP_PATH;
@@ -81,8 +83,7 @@ const base = {
       {
         test: /\.(png|woff|woff2|eot|ttf|svg)$/,
         loader: 'url-loader?limit=100000'
-      },
-      {
+      },{
         test: /\.jsx?$/,
         loader: 'babel-loader',
         exclude: /(node_modules|bower_components|\.embark[\\/]versions)/,
@@ -112,7 +113,19 @@ const base = {
             '@babel/preset-react'
           ].map(resolve)
         }
+      },
+      {
+        test: /\.vue?$/,
+        loader: 'vue-loader',
+        exclude: /(node_modules|bower_components|\.embark[\\/]versions)/,
+        options: {
+          plugins:[
+           [ new VueLoaderPlugin(), {
+                'alias': {'vue':'vue/dist/vue.js'}}
+                ]
+           ]
       }
+    }
     ]
   },
   output: {
@@ -123,7 +136,7 @@ const base = {
     libraryTarget: 'umd',
     path: buildDir
   },
-  plugins: [new HardSourceWebpackPlugin()],
+  plugins: [new HardSourceWebpackPlugin(), new VueLoaderPlugin()],
   // profiling and generating verbose stats increases build time; if stats
   // are generated embark will write the output to:
   //   path.join(dappPath, '.embark/stats.[json,report]')
