@@ -33,10 +33,10 @@ module.exports = {
     ],
     gas: "auto",
     contracts: {
-      // example:
-      //SimpleStorage: {
-      //  args: [ 100 ]
-      //}
+      SimpleStorage: {
+        fromIndex: 0,
+        args: [100]
+      }
     }
   },
 

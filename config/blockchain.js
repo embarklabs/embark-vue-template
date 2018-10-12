@@ -40,9 +40,22 @@ module.exports = {
     networkType: "custom",
     networkId: "1337",
     isDev: false,
-    genesisBlock: "config/privatenet/genesis.json", // Genesis block to initiate on first creation of a development node
     datadir: ".embark/privatenet/datadir",
+    // -- mineWhenNeeded --
+    // This options is only valid when isDev is false. 
+    // Enabling this option uses our custom script to mine only when needed.
+    // Embark creates a development account for you (using `geth account new`) and funds the account. This account can be used for
+    // development (and even imported in to MetaMask). To enable correct usage, a password for this account must be specified
+    // in the `account > password` setting below.
+    // NOTE: once `mineWhenNeeded` is enabled, you must run an `embark reset` on your dApp before running
+    // `embark blockchain` or `embark run` for the first time.
     mineWhenNeeded: true,
+    // -- genesisBlock --
+    // This option is only valid when mineWhenNeeded is true (which is only valid if isDev is false).
+    // When enabled, geth uses POW to mine transactions as it would normally, instead of using POA as it does in --dev mode.
+    // On the first `embark blockchain or embark run` after this option is enabled, geth will create a new chain with a 
+    // genesis block, which can be configured using the `genesisBlock` configuration option below.
+    genesisBlock: "config/privatenet/genesis.json", // Genesis block to initiate on first creation of a development node
     nodiscover: true,
     maxpeers: 0,
     proxy: true,
@@ -51,6 +64,8 @@ module.exports = {
       password: "config/privatenet/password" // Password to unlock the account
     },
     targetGasLimit: 8000000,
+    wsHost: "localhost",
+    wsPort: 8546,
     simulatorMnemonic: "example exile argue silk regular smile grass bomb merge arm assist farm",
     simulatorBlocktime: 0
   },

@@ -1,10 +1,8 @@
 <template>
 
   <div class="hello">
-    <input type="text" v-model="msg" />
-    <h3>Welcome to Embark!</h3>
+    <h1>{{msg}}</h1>
     <p>See the <a href="https://embark.status.im/docs/" target="_blank">Embark's documentation</a> to see what you can do with Embark!</p>
-    <h1>{{ msg }}</h1>
     <h2>Essential Links</h2>
     <ul>
       <li>
@@ -86,7 +84,7 @@ export default {
   name: 'HelloWorld',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js DApp'
+      msg: 'Welcome to Embark + VueJS DApp Demo!'
     }
   }
 }
