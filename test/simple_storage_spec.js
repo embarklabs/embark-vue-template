@@ -1,5 +1,5 @@
 // /*global contract, config, it, assert*/
-/*
+
 const SimpleStorage = require('Embark/contracts/SimpleStorage');
 
 let accounts;
@@ -39,5 +39,5 @@ contract("SimpleStorage", function () {
     let balance = await web3.eth.getBalance(accounts[0]);
     assert.ok(parseInt(balance, 10) > 0);
   });
-}
-*/
+});
+
