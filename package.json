@@ -1,6 +1,6 @@
 {
   "name": "embark-vue-template",
-  "version": "0.0.1",
+  "version": "1.0.1",
   "description": "",
   "scripts": {
     "test": "embark test"
@@ -9,6 +9,12 @@
   "license": "ISC",
   "homepage": "",
   "dependencies": {
+    "@babel/runtime-corejs2": "^7.3.4",
+    "css-loader": "^2.1.1",
+    "embarkjs-connector-web3": "4.0.0",
+    "rxjs": "^6.4.0",
+    "style-loader": "^0.23.1",
+    "url-loader": "^1.1.2",
     "vue": "^2.5.17",
     "vue-router": "^3.0.1"
   },
